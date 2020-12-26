@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:zenbank/models/user_model.dart';
+import 'package:zenbank/providers/user_provider.dart';
 import 'package:zenbank/utils/color_constants.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -31,6 +34,11 @@ class _SignupScreenState extends State<SignupScreen> {
           await FirebaseAuth.instance.currentUser
               .updateProfile(displayName: _nameController.text);
           Navigator.of(context).pushReplacementNamed('/login');
+          await firestoreService.createUser(UserData(
+            uid: user.uid,
+            displayName: _nameController.text,
+            accountNumber: 77878,
+          ));
         }
       } catch (e) {
         print(e);
@@ -85,6 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
