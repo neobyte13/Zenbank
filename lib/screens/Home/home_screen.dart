@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             //Show account (accounts)
-            listAccounts(),
+            listAccounts(context),
             //Show most recent transactions.
             Padding(
               padding:
