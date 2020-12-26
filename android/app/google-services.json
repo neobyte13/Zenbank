@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "462749218888",
+    "project_id": "zenbank-710de",
+    "storage_bucket": "zenbank-710de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462749218888:android:e1ea39f8a85872f6cdc07d",
+        "android_client_info": {
+          "package_name": "com.daniel.zenbank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462749218888-ib1jgecaspevebcvo0tb69nu1024q050.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLJ2J_26qQevJmfgzU6j1vpN46Xq5vIeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462749218888-ib1jgecaspevebcvo0tb69nu1024q050.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
