@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: EdgeInsets.only(left: 24, top: 8, bottom: 16),
               child: Text(
-                "Hi, ${sharedPrefs.username}",
+                "Welcome, ${sharedPrefs.username}",
                 style: GoogleFonts.nunito(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,

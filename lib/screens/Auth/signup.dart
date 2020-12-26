@@ -1,6 +1,10 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zenbank/utils/color_constants.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -10,11 +14,15 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
+  int max = 999999999;
+  int min = 100000000;
+  Random rnd = new Random();
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  CollectionReference _users = FirebaseFirestore.instance.collection('users');
 
   registerUser() async {
     if (_emailController.text.isNotEmpty &&
@@ -30,7 +38,20 @@ class _SignupScreenState extends State<SignupScreen> {
         if (user != null) {
           await FirebaseAuth.instance.currentUser
               .updateProfile(displayName: _nameController.text);
-          Navigator.of(context).pushReplacementNamed('/home');
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('displayName', user.displayName);
+          int accountNumber = min + rnd.nextInt(max - min);
+          print(accountNumber);
+          await _users
+              .doc(user.uid)
+              .set({
+                'displayName': _nameController.text,
+                'accountNumber': accountNumber.toString(),
+                'accountBalance': 0.00,
+              })
+              .then((value) => print("User Added"))
+              .catchError((error) => print("Failed to add user: $error"));
+          Navigator.of(context).pushReplacementNamed('/login');
         }
       } catch (e) {
         print(e);

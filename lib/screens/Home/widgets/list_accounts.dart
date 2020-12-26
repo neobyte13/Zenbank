@@ -1,3 +1,4 @@
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:zenbank/models/account_model.dart';
 Widget listAccounts() {
   return Builder(
     builder: (context) {
+      //User user = FirebaseAuth.instance.currentUser;
       return Container(
         height: 175,
         child: Container(
