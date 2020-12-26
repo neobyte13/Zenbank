@@ -37,22 +37,6 @@ Widget listTransactions() {
                 width: 24,
               ),
               Positioned(
-                right: 8,
-                top: 8,
-                child: SvgPicture.asset('assets/svg/jenius_bg.svg'),
-              ),
-              Positioned(
-                top: 16,
-                right: 16,
-                child: Text(
-                  transactions[index].name,
-                  style: GoogleFonts.nunito(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: transactions[index].colorType),
-                ),
-              ),
-              Positioned(
                 top: 64,
                 left: 16,
                 child: Text(
@@ -98,15 +82,6 @@ Widget listTransactions() {
                       color: kGreyColor),
                 ),
               ),
-              Positioned(
-                right: 14,
-                bottom: 16,
-                child: Image.asset(
-                  transactions[index].card,
-                  height: 22,
-                  width: 33,
-                ),
-              )
             ],
           ),
         );

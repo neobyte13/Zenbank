@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           prefs.setString('displayName', user.displayName);
-                          Navigator.of(context).pushNamed('/home');
+                          Navigator.of(context).pushReplacementNamed('/home');
                         }
                       } catch (e) {
                         print(e);
