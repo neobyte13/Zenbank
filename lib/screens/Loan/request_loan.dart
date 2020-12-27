@@ -20,11 +20,11 @@ class _RequestLoanScreenState extends State<RequestLoanScreen> {
     String notifBody = "Your loan request for " +
         _amountController.text.toString() +
         " has been approved.";
-    var android = new AndroidNotificationDetails(
+    var android = AndroidNotificationDetails(
         'channel id', 'channel NAME', 'CHANNEL DESCRIPTION',
         priority: Priority.high, importance: Importance.max);
-    var iOS = new IOSNotificationDetails();
-    var platform = new NotificationDetails(android: android, iOS: iOS);
+    var iOS = IOSNotificationDetails();
+    var platform = NotificationDetails(android: android, iOS: iOS);
     await flutterLocalNotificationsPlugin.show(
         0, 'Loan Request Accepted', notifBody, platform,
         payload: 'Loan Approved');
@@ -140,6 +140,7 @@ class _RequestLoanScreenState extends State<RequestLoanScreen> {
                                     }).then((_) {
                                       print("success!");
                                     });
+                                    _showNotification();
                                   } catch (e) {
                                     print(e);
                                     showDialog(
@@ -161,10 +162,6 @@ class _RequestLoanScreenState extends State<RequestLoanScreen> {
                                     );
                                   }
                                   Navigator.of(context).pop();
-                                  Future.delayed(const Duration(seconds: 3),
-                                      () {
-                                    _showNotification();
-                                  });
                                 },
                               ),
                             ],
