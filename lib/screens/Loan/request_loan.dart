@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zenbank/main.dart';
 import 'package:zenbank/utils/color_constants.dart';
 
 class RequestLoanScreen extends StatefulWidget {
@@ -13,6 +15,24 @@ class _RequestLoanScreenState extends State<RequestLoanScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _amountController = TextEditingController();
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+
+  Future<void> _showNotification() async {
+    String notifBody = "Your loan request for " +
+        _amountController.text.toString() +
+        " has been approved.";
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+            'your channel id', 'your channel name', 'your channel description',
+            importance: Importance.max,
+            priority: Priority.high,
+            ticker: 'ticker');
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0, 'Loan Request Accepted', notifBody, platformChannelSpecifics,
+        payload: 'Loan Request Approval');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +166,7 @@ class _RequestLoanScreenState extends State<RequestLoanScreen> {
                                   Navigator.of(context).pop();
                                   Future.delayed(const Duration(seconds: 3),
                                       () {
-                                    //notify
+                                    _showNotification();
                                   });
                                 },
                               ),

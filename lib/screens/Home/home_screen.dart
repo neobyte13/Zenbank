@@ -11,15 +11,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:zenbank/utils/shared_prefs.dart';
 
 class HomeScreen extends StatefulWidget {
-  final int id;
+  final String payload;
 
-  const HomeScreen({Key key, this.id}) : super(key: key);
+  const HomeScreen(this.payload, {Key key}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   var firebaseUser = FirebaseAuth.instance.currentUser;
+
+  String _payload;
+  @override
+  void initState() {
+    super.initState();
+    _payload = widget.payload;
+    print(_payload);
+  }
 
   @override
   Widget build(BuildContext context) {
