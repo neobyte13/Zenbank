@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zenbank/models/account_model.dart';
 import 'package:zenbank/screens/Home/widgets/list_quick_actions.dart';
@@ -11,22 +12,34 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:zenbank/utils/shared_prefs.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String payload;
-
-  const HomeScreen(this.payload, {Key key}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   var firebaseUser = FirebaseAuth.instance.currentUser;
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  String _payload;
   @override
   void initState() {
     super.initState();
-    _payload = widget.payload;
-    print(_payload);
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var iOS = new IOSInitializationSettings();
+    var initSetttings = new InitializationSettings(android: android, iOS: iOS);
+    flutterLocalNotificationsPlugin.initialize(initSetttings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  Future onSelectNotification(String payload) {
+    debugPrint("payload : $payload");
+    showDialog(
+      context: context,
+      builder: (_) => new AlertDialog(
+        title: new Text('Notification'),
+        content: new Text('$payload'),
+      ),
+    );
   }
 
   @override
