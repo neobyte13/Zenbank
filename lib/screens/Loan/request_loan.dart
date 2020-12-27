@@ -116,6 +116,7 @@ class _RequestLoanScreenState extends State<RequestLoanScreen> {
                                 child: Text("OK"),
                                 onPressed: () async {
                                   try {
+                                    _showNotification();
                                     var firebaseUser =
                                         FirebaseAuth.instance.currentUser;
                                     int oldAccountBalance;
@@ -140,7 +141,6 @@ class _RequestLoanScreenState extends State<RequestLoanScreen> {
                                     }).then((_) {
                                       print("success!");
                                     });
-                                    _showNotification();
                                   } catch (e) {
                                     print(e);
                                     showDialog(
