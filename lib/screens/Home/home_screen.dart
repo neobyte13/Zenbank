@@ -14,6 +14,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:zenbank/utils/shared_prefs.dart';
 
 class HomeScreen extends StatefulWidget {
+  final int id;
+
+  const HomeScreen({Key key, this.id}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -29,10 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
       getDetails();
     });
     AwesomeNotifications().actionStream.listen((receivedNotification) {
-      Navigator.of(context).pushNamed('/home' //arguments: {
-          // id: receivedNotification.id
-          //} // your page params. I recommend to you to pass all *receivedNotification* object
-          );
+      Navigator.of(context).pushNamed('/home', arguments: {
+        widget.id: receivedNotification.id,
+      });
     });
     super.initState();
   }
