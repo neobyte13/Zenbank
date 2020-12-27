@@ -33,11 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future onSelectNotification(String payload) {
     debugPrint("payload : $payload");
-    showDialog(
+    return showDialog(
       context: context,
-      builder: (_) => new AlertDialog(
-        title: new Text('Notification'),
-        content: new Text('$payload'),
+      builder: (_) => AlertDialog(
+        title: Text('Notification'),
+        content: Text('$payload'),
+        actions: [
+          FlatButton(
+            child: Text("OK"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
       ),
     );
   }
