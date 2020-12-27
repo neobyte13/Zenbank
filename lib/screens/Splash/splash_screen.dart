@@ -46,6 +46,16 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
           ),
+          Center(
+            child: Text(
+              'This is a demo project',
+              style: GoogleFonts.nunito(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: Colors.red,
+              ),
+            ),
+          ),
         ],
       ),
     );
